@@ -24,19 +24,10 @@ jobs:
 
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-npm-deps-{{ checksum "package-lock.json" }}
-
-            - v1-npm-deps-
       - run:
           name: Install Dependencies
           command: npm install
       - run: npm install --save-dev firebase-tools
-      - save_cache:
-          key: v1-npm-deps-{{ checksum "package-lock.json" }}
-          paths:
-            - ./node_modules
       - run:
           name: Build end
           command: echo 'end'
@@ -52,18 +43,10 @@ jobs:
 
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-npm-deps-{{ checksum "./package-lock.json" }}
-            - v1-npm-deps-
       - run:
           name: Install Dependencies
           command: npm install
       - run: npm install --save-dev firebase-tools
-      - save_cache:
-          key: v1-npm-deps-{{ checksum "package-lock.json" }}
-          paths:
-            - ./node_modules
       - run:
           name: Firebase Deploy
           command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN"
