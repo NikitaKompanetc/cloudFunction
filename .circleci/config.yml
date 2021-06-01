@@ -1,0 +1,42 @@
+version: 2
+jobs:
+  build:
+    docker:
+
+      - image: circleci/node:14
+
+    working_directory: ./function
+    steps:
+      - run:
+          name: install deb
+          command: npm install
+      - run:
+          name: test build
+          command: npm run build     
+  deploy:
+    docker:
+
+      - image: circleci/node:14
+
+    working_directory: ./function
+    steps:
+      - run:
+          name: install deb
+          command: npm install
+      - run:
+          name: test build
+          command: npm run build
+      - run:
+          name: Deploy Master to Firebase
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
