@@ -4,12 +4,7 @@ workflows:
   build-deploy:
     jobs:
       - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: main
+    
 
 jobs:
   build:
@@ -20,33 +15,17 @@ jobs:
 
     docker:
       - image: circleci/node:15
-    working_directory: ~/functions
-
     steps:
       - checkout
       - run:
           name: Install Dependencies
-          command: npm install
+          command: cd ./functions;  npm install
       - run: npm install --save-dev firebase-tools
       - run:
           name: Build end
           command: echo 'end'
-  deploy:
-    filters:
-      branches:
-        only:
-          - main
-
-    docker:
-      - image: circleci/node:15
-    working_directory: ~/functions
-
-    steps:
-      - checkout
-      - run:
-          name: Install Dependencies
-          command: npm install
       - run: npm install --save-dev firebase-tools
       - run:
           name: Firebase Deploy
           command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN"
+
