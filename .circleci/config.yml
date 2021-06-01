@@ -5,7 +5,7 @@ jobs:
 
       - image: circleci/node:14
 
-    working_directory: ./function
+    working_directory: /functions
     steps:
       - run:
           name: install deb
@@ -18,7 +18,7 @@ jobs:
 
       - image: circleci/node:14
 
-    working_directory: ./function
+    working_directory: /functions
     steps:
       - run:
           name: install deb
