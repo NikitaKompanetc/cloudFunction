@@ -20,7 +20,7 @@ jobs:
 
     docker:
       - image: circleci/node:15
-    working_directory: ~/func
+    working_directory: ~/func/functions
 
     steps:
       - checkout
@@ -48,7 +48,7 @@ jobs:
 
     docker:
       - image: circleci/node:15
-    working_directory: ~/functions
+    working_directory: ~/func/functions
 
     steps:
       - checkout
