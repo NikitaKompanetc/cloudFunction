@@ -14,7 +14,7 @@ jobs:
           - main
 
     docker:
-      - image: circleci/node:15
+      - image: circleci/node:14
     steps:
       - checkout
       - run:
