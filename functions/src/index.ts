@@ -4,7 +4,7 @@ import * as admin from "firebase-admin";
 admin.initializeApp();
 
 export const scheduledFunctionPlainEnglish = functions.pubsub
-  .schedule("every 5 minutes")
+  .schedule("0 1 * * *")
   .onRun(async () => {
     return (await admin.firestore().collection("items").get()).docs.forEach(
       (doc) => {

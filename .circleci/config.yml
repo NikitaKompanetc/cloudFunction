@@ -27,5 +27,5 @@ jobs:
       - run: npm install --save-dev firebase-tools
       - run:
           name: Firebase Deploy
-          command: ./node_modules/.bin/firebase deploy --only functions --token "$FIREBASE_TOKEN"
+          command: ./node_modules/.bin/firebase deploy --only functions --force --token "$FIREBASE_TOKEN"
 
