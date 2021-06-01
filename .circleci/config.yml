@@ -4,9 +4,15 @@ jobs:
     docker:
 
       - image: circleci/node:14
-
+    
     working_directory: ~/functions
     steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-npm-deps-{{ checksum "package-lock.json" }}
+
+            - v1-npm-deps-
       - run:
           name: install deb
           command: npm install
@@ -20,6 +26,12 @@ jobs:
 
     working_directory: ~/functions
     steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-npm-deps-{{ checksum "package-lock.json" }}
+
+            - v1-npm-deps-
       - run:
           name: install deb
           command: npm install
